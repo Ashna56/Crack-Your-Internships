@@ -1,0 +1,128 @@
+Ques1: https://leetcode.com/problems/find-the-duplicate-number/
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        sort(nums.begin() , nums.end());
+        int n= nums.size();
+        
+        for(int i=0 ; i<n+1 ; i++){
+            if(nums[i]==nums[i+1]) return nums[i];
+            }
+        return -1;
+    }
+};
+
+Ques2: https://leetcode.com/problems/sort-colors/
+
+class Solution {
+public:
+   
+    void sortColors(vector<int>& nums) {
+        int n=nums.size();
+        int low=0;
+        int mid=0;
+        int high=n-1;
+        
+        while(mid<=high){
+            if(nums[mid]==0) {
+                swap(nums[low++], nums[mid++]);
+            }
+            else if(nums[mid]==1){
+                mid++;
+            }
+            else{
+                swap(nums[mid], nums[high]);
+                high--;
+            }
+        }
+        
+        
+    }
+};
+
+Ques3: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int n=nums.size();
+        int i=0;
+        if(n==0) return 0;
+        
+        for(int j=1 ; j<n ; j++){
+            if(nums[j]!= nums[i]){
+                i++;
+                swap(nums[i], nums[j]);
+            }
+        } 
+        return i+1;
+    }
+};
+
+Ques4: https://leetcode.com/problems/set-matrix-zeroes/
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int col0 = 1, rows = matrix.size(), cols = matrix[0].size();
+
+    for (int i = 0; i < rows; i++) {
+        if (matrix[i][0] == 0) col0 = 0;
+        for (int j = 1; j < cols; j++)
+            if (matrix[i][j] == 0)
+                matrix[i][0] = matrix[0][j] = 0;
+    }
+
+    for (int i = rows - 1; i >= 0; i--) {
+        for (int j = cols - 1; j >= 1; j--)
+            if (matrix[i][0] == 0 || matrix[0][j] == 0)
+                matrix[i][j] = 0;
+        if (col0 == 0) matrix[i][0] = 0;
+    }
+    }
+};
+
+Ques5: https://leetcode.com/problems/move-zeroes/
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int n=nums.size();
+        int j=0;
+        
+        for(int i=0; i<n ; i++)
+        {
+            if(nums[i]!=0)
+            {
+               nums[j++]= nums[i];
+            }
+        }
+        while(j<n)
+            nums[j++]=0;
+    
+        
+    }
+};
+
+Ques6: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int minprice = INT_MAX;
+        int maxprofit = 0;
+        for(int i = 0; i<prices.size() ; i++) {
+            if(prices[i]< minprice)
+            {
+                minprice = prices[i];
+        
+            }
+            else if(prices[i] -minprice>maxprofit)
+            {
+                maxprofit=prices[i] - minprice;
+            }
+        }      
+        return maxprofit;
+    }
+};
