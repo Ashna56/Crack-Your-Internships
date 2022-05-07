@@ -1,0 +1,116 @@
+Ques7: https://www.geeksforgeeks.org/chocolate-distribution-problem/
+
+class Solution{
+    public:
+    long long findMinDiff(vector<long long> a, long long n, long long m){
+    
+    sort(a.begin(), a.end());
+    long long i=0;
+    long long j=m-1;
+    long long d=INT_MAX;
+    
+    for(i; j<n ; i++){
+        d=min(d, a[j]-a[i]);
+        j++;
+    }
+    return d;
+    }  
+};
+
+Ques8: https://leetcode.com/problems/two-sum/
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+        int n = nums.size();
+        for(int i=0 ; i<n ; i++){
+            for(int j=i+1 ; j<n ; j++){
+                
+                if(nums[i] + nums[j] == target){
+                    return {i,j};
+                }
+            }
+        }
+        return{-1,-1};
+    }
+};
+
+Ques9: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        
+        int profit=0;
+        
+        for(int i=1; i<prices.size(); i++){
+            if(prices[i]>prices[i-1])
+                profit+=(prices[i]-prices[i-1]);
+                
+        }
+        return profit;
+        
+    }
+};
+
+Ques10: https://leetcode.com/problems/find-all-duplicates-in-an-array/
+
+class Solution {
+public:
+         int subarraysDivByK(vector<int>& A, int K) {
+        map<int,int> m;
+        int sum=0,res=0,n=A.size();
+        m[0]=1;
+        for(int i=0;i<n;i++){
+            sum += A[i];
+            int rem = sum % K;
+            if(rem < 0)  rem += K; 
+            
+            if(m.find(rem)!=m.end()){
+                res += m[rem];
+            }
+            m[rem]++;
+        }
+        return res;
+    }    
+    
+};
+
+Ques11: https://leetcode.com/problems/find-all-duplicates-in-an-array/
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        vector<int> ans;
+        for(int i = 0; i < nums.size(); ++i){
+            int idx = abs(nums[i]) - 1;
+            if(nums[idx] < 0)
+                ans.push_back(idx + 1);
+            else
+                nums[idx] = -nums[idx];
+        }
+       
+        return ans;
+    }
+};
+
+Ques12: https://leetcode.com/problems/container-with-most-water/
+
+class Solution {
+public:
+    int maxArea(vector<int>& H) {
+        int ans = 0, i = 0, j = H.size()-1, res = 0;
+        while (i < j) {
+            if (H[i] <= H[j]) {
+                res = H[i] * (j - i);
+                i++;
+            } else {
+                res = H[j] * (j - i);
+                j--;
+            }
+            if (res > ans) ans = res;
+        }
+        return ans;
+    }
+};
